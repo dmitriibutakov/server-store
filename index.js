@@ -13,21 +13,21 @@ const password = process.env.SMTP_PASSWORD
 let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: login, // generated ethereal user
-        pass: password, // generated ethereal password
+        user: login,
+        pass: password,
     }
 })
 
-app.post('/sendMessage', jsonParser, async function (req, res) {
+app.post('/contactUs', jsonParser, async function (req, res) {
     const {name, email, number, message} = req.body
     let info = await transporter.sendMail({
-        from: `${name}`, // sender address
-        to: "sportyounde@gmail.com", // list of receivers
-        subject: "support ISTORE", // Subject line
+        from: `${name}`,
+        to: "sportyounde@gmail.com",
+        subject: "support ISTORE",
         html: `<b>Name:</b> ${name}<br>
 <b>contact me to email:</b>${email}<br>
 <b>my number:</b>${number}<br>
-<b>addition message:</b>${message}`, // html body
+<b>addition message:</b>${message}`,
     });
     res.send(req.body)
 });
